@@ -1,6 +1,14 @@
 import os
 from PIL import Image
 
+def normalize_filename(filename):
+    """
+    Normalize the filename by replacing spaces with hyphens and converting to lowercase.
+    """
+    name, ext = os.path.splitext(filename)
+    normalized_name = name.replace(" ", "-").lower()
+    return normalized_name + ext
+
 def convert_images_to_webp(input_dir, output_dir, quality=80, target_size=(1920, 1080)):
     """
     Convert and resize all JPEG and PNG images in the input directory and its subdirectories to WebP format.
@@ -25,7 +33,11 @@ def convert_images_to_webp(input_dir, output_dir, quality=80, target_size=(1920,
         for filename in files:
             if filename.lower().endswith(supported_formats):
                 input_file_path = os.path.join(root, filename)
-                output_file_path = os.path.join(output_path, os.path.splitext(filename)[0] + ".webp")
+
+                # Normalize the filename for output
+                normalized_filename = normalize_filename(filename)
+                output_file_name = os.path.splitext(normalized_filename)[0] + ".webp"
+                output_file_path = os.path.join(output_path, output_file_name)
 
                 try:
                     # Open the image file
@@ -65,7 +77,7 @@ if __name__ == "__main__":
     os.makedirs(output_directory, exist_ok=True)
 
     # Conversion quality
-    webp_quality = 50
+    webp_quality = 85
 
     # Run the conversion
     convert_images_to_webp(input_directory, output_directory, quality=webp_quality)
