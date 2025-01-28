@@ -1,0 +1,25 @@
+<!-- filepath: /d:/apps/python/image-optimizer/templates/index.html -->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Image Optimizer</title>
+  </head>
+  <body>
+    <h1>Upload Images</h1>
+    <form action="/upload" method="post" enctype="multipart/form-data">
+      <input type="file" name="files[]" multiple />
+      <label for="quality">Image Quality (1-100):</label>
+      <input
+        type="number"
+        id="quality"
+        name="quality"
+        min="5"
+        max="100"
+        value="80"
+        step="5"
+      />
+      <input type="submit" value="Upload" />
+    </form>
+  </body>
+</html>

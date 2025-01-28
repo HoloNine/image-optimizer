@@ -1,5 +1,6 @@
 import os
 from PIL import Image
+from utils.clear_directory import clear_directory
 
 def normalize_filename(filename):
     """
@@ -65,6 +66,8 @@ def convert_images_to_webp(input_dir, output_dir, quality=80, target_size=(1920,
                     print(f"Converted and resized: {input_file_path} -> {output_file_path} (Quality: {quality})")
                 except Exception as e:
                     print(f"Failed to convert {input_file_path}: {e}")
+
+    clear_directory(input_dir)
 
 # Example usage
 if __name__ == "__main__":
